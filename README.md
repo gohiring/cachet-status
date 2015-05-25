@@ -25,6 +25,9 @@ var callback = function (components) {
 new CachetStatus('https://status.gohiring.com', callback);
 ```  
 
+## Credits
+
+[CachetHQ](https://cachethq.io/) is awesome! You should try it when you need a status page.
 
 ## Copyright information
 
