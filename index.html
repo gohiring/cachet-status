@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CachetHQ Status</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>
+          <div class="pull-right">
+            <a href="https://github.com/gohiring/cachet-status" class="btn btn-success btn-sm">Source Code</a>
+          </div>
+
+          CachetHQ Status
+        </h1>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <p>
+            <code>CachetStatus</code> uses <a href="http://cachet.readme.io/v1.0/docs/component-statuses">CachetHQ API</a> to get a list of system components and their statuses.
+          </p>
+          <p>
+            Below you see an example with a popover window that shows information about all GoHiring APIs.
+          </p>
+          <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <span id="popover-example">
+                <span class="glyphicon glyphicon-question-sign"></span>
+                <a href="https://status.gohiring.com">Status</a>
+              </span>
+            </div>
+          </div>
+          <p>
+            <strong>Tip:</strong> Code that serves this status link is on the right side ;)
+          </p>
+          <p class="small text-muted">
+            &copy; 2015 GoHiring GmbH, <a href="http://www.gohiring.com">www.gohiring.com</a>
+          </p>
+        </div>
+        <div class="col-md-7">
+          <script src="https://gist.github.com/soulim/d33e50609e549458f9b5.js"></script>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="cachet-status.js"></script>
+    <script>
+      $(function () {
+        var initStatus = function (components) {
+          var content = '',
+              allGood = true;
+
+          // Iterate over all components from Cachet API response and build
+          // HTML code for popover window.
+          //
+          // One component is represened with its name and state icon.
+          //
+          // Example:
+          //
+          //   <div>
+          //     <span class="glyphicon glyphicon-ok-sign text-success"></span>
+          //     Multiposting API
+          //   </div>
+          for (var i = 0; i < components.length; i++) {
+            content += '<div>';
+            if (components[i].status === 'operational') {
+              content += '<span class="glyphicon glyphicon-ok-sign text-success"></span>';
+            } else {
+              content += '<span class="glyphicon glyphicon-exclamation-sign text-danger"></span>';
+            }
+            content += ' ' + components[i].name;
+            content += '</div>';
+
+            if (components[i].status !== 'operational') {
+              allGood = false;
+            }
+          }
+
+          var status = $('#popover-example'),
+              icon = $('#popover-example > span.glyphicon');
+
+          // Set status icon state
+          icon.removeClass('glyphicon-question-sign')
+              .toggleClass('glyphicon-ok-sign text-success', allGood)
+              .toggleClass('glyphicon-exclamation-sign text-danger', !allGood);
+
+          // Set content of the popover window and activate it
+          status.data('content', content)
+                .popover({ trigger: 'hover focus', html: true });
+        };
+
+        new CachetStatus('https://status.gohiring.com', initStatus);
+      });
+    </script>
+  </body>
+</html>
