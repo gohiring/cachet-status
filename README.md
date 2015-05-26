@@ -1,5 +1,8 @@
 # CachetHQ Status
 
+> CachetHQ - an open source status page system, for everyone.  
+> -- [cachethq.io](https://cachethq.io/)
+
 `CachetStatus` uses CachetHQ API to get a list of system components and their
 statuses.
 
