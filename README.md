@@ -9,6 +9,8 @@ statuses.
 You decide what to do with received information. On the demo page you could
 find an example of a nice looking popover window with all GoHiring APIs and their current statuses.
 
+`CachetStatus` does not have any external dependency, so you could use it with your favorite framework or as a standalone library.
+
 ## Usage
 
 `CachetStatus` constructor received two parameters:
