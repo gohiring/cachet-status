@@ -4,7 +4,7 @@
   }
 
   CachetStatus.DEFAULTS = {
-    endpointPath: '/api/components'
+    endpointPath: '/api/v1/components'
   }
 
   CachetStatus.prototype.init = function (url, callback) {
@@ -22,7 +22,7 @@
         for (var i = 0; i < data.length; i++) {
           components.push({
             name: data[i].name,
-            status: data[i].status.toLowerCase()
+            status: data[i].status_name.toLowerCase()
           });
         }
 
