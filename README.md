@@ -36,4 +36,4 @@ new CachetStatus('https://status.gohiring.com', callback);
 
 ## Copyright information
 
-Copyright (c) 2015 [GoHiring GmbH](http://www.gohiring.com)
+Copyright (c) 2016 [GoHiring GmbH](http://www.gohiring.com)
